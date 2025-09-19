@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/output.css">
+</head>
+<body class="flex items-center justify-center h-screen flex-col">
+    <h1 class="font-semibold">Welcome Back</h1>
+    <div class="w-full max-w-md bg-white shadow-lg rounded-2xl p-6 md:p-8 transition-all duration-300">
+    <form id="signInForm" method="POST" action="/users/login" class="space-y-4">
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Email</label>
+                <input type="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="rajesh@email.com">
+            </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Password</label>
+                <input type="password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="••••••••">
+            </div>
+            <div class="flex justify-between text-sm text-gray-600">
+                <label class="flex items-center space-x-2">
+                    <input type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                    <span>Remember me</span>
+                </label>
+                <a href="#" class="text-indigo-600 hover:underline">Forgot password?</a>
+            </div>
+            <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg shadow-md hover:shadow-lg transition">Sign In</button>
+        </form>
+        </div>
+</body>
+</html>
