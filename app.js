@@ -8,7 +8,6 @@ let userModel = require("./models/user")
 
 let app = express();
 
-
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -30,7 +29,7 @@ app.post("/users/register", async (req, res) => {
     if (user) {
         return res.redirect("/users/login");
     }
-    let salt = bcrypt.genSalt();
+    let salt = await bcrypt.genSalt();
     let hashedPassword = await bcrypt.hash(password, salt);
 
     user = await userModel.create({ name, email, password: hashedPassword });
