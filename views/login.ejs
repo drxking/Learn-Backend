@@ -1,32 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/output.css">
+    <title>Login - Company name</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/output.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+        @font-face {
+            font-family: mono;
+            src: url("/fonts/epilogue.ttf");
+        }
+
+        * {
+            font-family: "Inter";
+        }
+    </style>
 </head>
-<body class="flex items-center justify-center h-screen flex-col">
-    <h1 class="font-semibold">Welcome Back</h1>
-    <div class="w-full max-w-md bg-white shadow-lg rounded-2xl p-6 md:p-8 transition-all duration-300">
-    <form id="signInForm" method="POST" action="/users/login" class="space-y-4">
-            <div>
-                <label class="block text-gray-700 font-medium mb-1">Email</label>
-                <input type="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="rajesh@email.com">
-            </div>
-            <div>
-                <label class="block text-gray-700 font-medium mb-1">Password</label>
-                <input type="password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="••••••••">
-            </div>
-            <div class="flex justify-between text-sm text-gray-600">
-                <label class="flex items-center space-x-2">
-                    <input type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                    <span>Remember me</span>
-                </label>
-                <a href="#" class="text-indigo-600 hover:underline">Forgot password?</a>
-            </div>
-            <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg shadow-md hover:shadow-lg transition">Sign In</button>
-        </form>
+
+<body class="md:overflow-hidden bg-[#E9E9E9]">
+    <main class="w-full h-screen md:p-2 flex items-center justify-end">
+        <div class="image  h-full w-0 md:w-[60%]">
+            <img id="look" class="h-full origin-center w-full object-cover scale-90" src="/ilus.png" alt="ilus">
         </div>
+        <div class="md:w-[540px]  w-full bg-[#FFFFFF] flex flex-col items-center md:p-16 p-10  h-full md:rounded-3xl">
+            <!-- <img class="h-12" src="logo" alt=""> -->
+            <h1 class="capitalize font-[mono] text-4xl font-semibold mt-6 w-full text-center">Welcome Back!</h1>
+            <!-- <h1 class="font-[mono]">Admin</h1> -->
+            <p class="font-semibold mt-4 text-black/70 text-sm">Please Enter Your Details</p>
+            <form action="/auth/login" class="flex gap-8  mt-14 flex-col w-full" method="POST">
+                <div class="flex flex-col justify-center relative">
+                    <label id="email_label"
+                        class="text-black/40 pointer-events-none font-medium absolute p-2 duration-200 top-[0%]"
+                        for="email">Email</label>
+                    <input class="border-b-[2px] text-xl focus:outline-none  border-black/40 p-2" type="email"
+                        id="email" name="email">
+                </div>
+
+                <div class="flex flex-col  relative justify-center">
+                    <label id="password_label"
+                        class="text-black/40 pointer-events-none font-medium  p-2 absolute duration-200 top-[0%]"
+                        for="password">Password</label>
+                    <input class="border-b-[2px] focus:outline-none  border-black/40 p-2" type="password" id="password"
+                        name="password">
+                    <div class="icon absolute top-1/2 -translate-y-1/2 cursor-pointer px-1 right-0" id="show-pass"><i
+                            class="ri-eye-line text-2xl"></i></div>
+                </div>
+
+                <input type="submit" value="Log in"
+                    class="font-medium text-lg bg-[#1B1D21] text-white p-3 rounded-full mt-5 cursor-pointer">
+            </form>
+            <p class="mt-2 w-full p-3 text-sm">Doesn't have account? <a href="/auth/signup" class="text-blue-700 underline">Signup</a></p>
+            <!-- <p class="text-xs mt-10 text-center">You are a only one superuser Who can enter through this portal!</p> -->
+        </div>
+    </main>
+
+
+    <script>
+        let emailInput = document.getElementById("email")
+        let email_label = document.getElementById("email_label")
+        let passwordInput = document.getElementById('password')
+        let password_label = document.getElementById("password_label")
+        let show_pass = document.getElementById("show-pass")
+        let look = document.getElementById("look")
+
+
+
+
+        // Username Input Field Animation
+
+        emailInput.addEventListener("focus", () => {
+            email_label.style.top = `-50%`
+            email_label.style.padding = `0`
+            email_label.style.scale = `0.9`
+        })
+        emailInput.addEventListener("blur", () => {
+            if (!emailInput.value) {
+                email_label.style.top = `0%`
+                email_label.style.padding = `8px`
+                email_label.style.scale = `1`
+            }
+        })
+
+
+
+        // Password Input field animation
+
+        passwordInput.addEventListener("focus", () => {
+            password_label.style.top = `-50%`
+            password_label.style.padding = `0`
+            password_label.style.scale = `0.9`
+        })
+        passwordInput.addEventListener("blur", () => {
+            if (!passwordInput.value) {
+                password_label.style.top = `0%`
+                password_label.style.padding = `8px`
+                password_label.style.scale = `1`
+            }
+        })
+
+
+
+
+        //Show/Hide Password Features
+
+        show_pass.addEventListener("click", () => {
+            if (passwordInput.type == "password") {
+                passwordInput.type = "text"
+                show_pass.innerHTML = `<i class=" text-2xl ri-eye-off-line"></i>`
+                look.style.transform = `rotateY(180deg)`
+            }
+            else {
+                passwordInput.type = "password"
+                show_pass.innerHTML = `<i class="text-2xl ri-eye-line"></i>`
+                look.style.transform = `rotateY(0deg)`
+            }
+        })
+    </script>
 </body>
+
 </html>

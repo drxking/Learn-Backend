@@ -4,64 +4,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/output.css">
+    <title>Signup - Company Name</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/output.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+        @font-face {
+            font-family: mono;
+            src: url("/fonts/epilogue.ttf");
+        }
+
+        * {
+            font-family: "Inter";
+        }
+    </style>
 </head>
 
-<body class="bg-slate-900">
-  
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"
-                class="mx-auto h-10 w-auto" />
-            <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Sign in to your account</h2>
+<body class="md:overflow-hidden bg-[#E9E9E9]">
+    <main class="w-full h-screen md:p-2 flex items-center justify-end">
+        <div class="image  h-full w-0 md:w-[60%]">
+            <img id="look" class="h-full w-full object-cover scale-90" src="/ilus.png" alt="ilus">
         </div>
-
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="/users/register" method="POST" class="space-y-6">
-                <div>
-                    <label for="name" class="block text-sm/6 font-medium text-gray-100">Full name</label>
-                    <div class="mt-2">
-                        <input id="name" placeholder="Full name" type="text" name="name" required autocomplete="name"
-                            class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
-                    </div>
+        <div class="md:w-[540px]  w-full bg-[#FFFFFF] flex flex-col items-center md:px-16 p-10  h-full md:rounded-3xl">
+            <!-- <img class="h-12" src="logo" alt=""> -->
+            <h1 class="capitalize font-[mono] text-4xl font-semibold mt-6 w-full text-center">Doesn't Have account?</h1>
+            <!-- <h1 class="font-[mono]">Super Admin</h1> -->
+            <p class="font-semibold mt-4 text-black/70 text-sm">Please Fill up Your Details</p>
+            <form action="/auth/signup" class="flex gap-8  mt-8 flex-col w-full" method="POST">
+                <div class="flex flex-col justify-center relative">
+                    <label id="name_label"
+                        class="text-black/40 pointer-events-none font-medium absolute p-2 duration-200 top-[0%]"
+                        for="username"> Full Name</label>
+                    <input class="border-b-[2px] text-xl focus:outline-none  border-black/40 p-2" type="text" id="name"
+                        name="fullName">
                 </div>
-                <div>
-                    <label for="email" class="block text-sm/6 font-medium text-gray-100">Email address</label>
-                    <div class="mt-2">
-                        <input id="email" type="email" placeholder="Email" name="email" required autocomplete="email"
-                            class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
-                    </div>
+                <div class="flex flex-col justify-center relative">
+                    <label id="email_label"
+                        class="text-black/40 pointer-events-none font-medium absolute p-2 duration-200 top-[0%]"
+                        for="email">Email</label>
+                    <input class="border-b-[2px] text-xl focus:outline-none  border-black/40 p-2" type="email"
+                        id="email" name="email">
                 </div>
-
-                <div>
-                    <div class="flex items-center justify-between">
-                        <label for="password" class="block text-sm/6 font-medium text-gray-100">Password</label>
-                        <div class="text-sm">
-                            <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">Forgot password?</a>
-                        </div>
-                    </div>
-                    <div class="mt-2">
-                        <input id="password" type="password" placeholder="password" name="password" required autocomplete="current-password"
-                            class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
-                    </div>
+                
+                <div class="flex flex-col  relative justify-center">
+                    <label id="password_check_label"
+                        class="text-black/40 pointer-events-none font-medium  p-2 absolute duration-200 top-[0%]"
+                        for="password_check">Enter Password</label>
+                    <input class="border-b-[2px] focus:outline-none  border-black/40 p-2" type="password"
+                        id="password_check" name="password">
+                    <div class="icon absolute top-1/2 -translate-y-1/2 cursor-pointer px-1 right-0" id="show-pass"><i
+                            class="ri-eye-line text-2xl"></i></div>
                 </div>
-
-                <div>
-                    <button type="submit"
-                        class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Sign
-                        in</button>
-                </div>
+                <input type="submit" value="Log in"
+                    class="font-medium text-lg bg-[#1B1D21] text-white p-3 rounded-full  cursor-pointer">
             </form>
-
-            <p class="mt-10 text-center text-sm/6 text-gray-400">
-                Not a member?
-                <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">Start a 14 day free trial</a>
-            </p>
+            <!-- <p class="text-xs mt-10 text-center">You are a only one superuser Who can enter through this portal!</p> -->
+            <p class="text-sm  w-full mt-2 p-3">Already have account? <a class="text-blue-700 underline" href="/auth/login">Login</a></p>
         </div>
-    </div>
+    </main>
 
 
+    <script>
+        let nameInput = document.getElementById("name")
+        let emailInput = document.getElementById("email");
+        let passwordCheckInput = document.getElementById("password_check")
+        let name_label = document.getElementById("name_label")
+        let email_label = document.getElementById("email_label")
+        let password_check_label = document.getElementById("password_check_label")
+        let show_pass = document.getElementById("show-pass")
+        let look = document.getElementById("look")
+
+
+
+
+        // name Input Field Animation
+
+        nameInput.addEventListener("focus", () => {
+            name_label.style.top = `-50%`
+            name_label.style.padding = `0`
+            name_label.style.scale = `0.9`
+        })
+        nameInput.addEventListener("blur", () => {
+            if (!nameInput.value) {
+                name_label.style.top = `0%`
+                name_label.style.padding = `8px`
+                name_label.style.scale = `1`
+            }
+        })
+
+        emailInput.addEventListener("focus", () => {
+            email_label.style.top = `-50%`
+            email_label.style.padding = `0`
+            email_label.style.scale = `0.9`
+        })
+        emailInput.addEventListener("blur", () => {
+            if (!emailInput.value) {
+                email_label.style.top = `0%`
+                email_label.style.padding = `8px`
+                email_label.style.scale = `1`
+            }
+        })
+
+
+
+
+        // Password Input field animation
+
+        
+
+        passwordCheckInput.addEventListener("focus", () => {
+            password_check_label.style.top = `-50%`
+            password_check_label.style.padding = `0`
+            password_check_label.style.scale = `0.9`
+        })
+        passwordCheckInput.addEventListener("blur", () => {
+            if (!passwordCheckInput.value) {
+                password_check_label.style.top = `0%`
+                password_check_label.style.padding = `8px`
+                password_check_label.style.scale = `1`
+            }
+        })
+
+
+
+
+        //Show/Hide Password Features
+
+        show_pass.addEventListener("click", () => {
+            if (passwordInput.type == "password") {
+                passwordInput.type = "text"
+                passwordCheckInput.type = "text"
+                show_pass.innerHTML = `<i class=" text-2xl ri-eye-off-line"></i>`
+                look.style.transform = `rotateY(180deg)`
+            }
+            else {
+                passwordInput.type = "password"
+                passwordCheckInput.type = "password"
+                show_pass.innerHTML = `<i class="text-2xl ri-eye-line"></i>`
+                look.style.transform = `rotateY(0deg)`
+            }
+        })
+    </script>
 </body>
 
 </html>

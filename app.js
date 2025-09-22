@@ -1,66 +1,25 @@
-let express = require("express");
-let path = require("path")
-let fs = require("fs")
-let cookieParser = require("cookie-parser")
-let bcrypt = require("bcryptjs")
+const express = require("express");
+const cookieParser = require("cookie-parser")
+require("dotenv").config()
 require("./config/db")
-let userModel = require("./models/user")
+const path = require("path")
 
-let app = express();
+let authRouter = require("./routes/auth.route")
 
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
+const app = express()
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser())
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use(express.static(path.join(__dirname,"public")))
+app.set('view engine',"ejs")
 
-app.get("/", (req, res) => {
-    res.render("home")
+app.get("/",(req,res)=>{
+    res.send("Home")
 })
 
-app.get("/users/register", (req, res) => {
-    res.render("register")
-})
+app.use("/auth",authRouter);
 
-app.post("/users/register", async (req, res) => {
-    let { name, email, password } = req.body;
-    let user = await userModel.findOne({ email });
-    if (user) {
-        return res.redirect("/users/login");
-    }
-    let salt = await bcrypt.genSalt();
-    let hashedPassword = await bcrypt.hash(password, salt);
-
-    user = await userModel.create({ name, email, password: hashedPassword });
-    res.cookie("token", user.email, {
-        maxAge: 81400
-    });
-    res.redirect("/users/login");
-})
-
-app.get("/users/login", (req, res) => {
-    res.render("login")
-})
-
-
-app.post("/users/login", async (req, res) => {
-    let { email, password } = req.body;
-    console.log(req.body)
-    let user = await userModel.findOne({ email })
-    if (!user) {
-        return res.redirect("/users/login");
-    }
-    console.log(user)
-    let result = bcrypt.compare(password, user.password);
-    if (result) {
-        res.cookie("token", user.email, {
-        maxAge: 81400
-    });
-        return res.redirect("/")
-    }
-    res.redirect("/users/login");
-})
-app.listen(3000, () => {
-    console.log("Listening at port 3000");
+app.listen(process.env.PORT,()=>{
+    console.log(`Listening at PORT ${process.env.PORT}`)
 })
